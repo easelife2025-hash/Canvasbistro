@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-wood-950: #130a05;
+    --color-wood-900: #1f1109;
+    --color-wood-850: #29170e;
+    --color-wood-800: #361f13;
+    --color-wood-700: #4a2b1b;
+    --color-wood-600: #623a24;
+    --color-wood-500: #824f33;
+    --color-wood-400: #aa6e4c;
+    --color-wood-200: #ddbfac;
+    --color-wood-100: #efe3d9;
+    --color-wood-50: #fcf9f6;
+
+    --color-amber-gold: #f59e0b;
+    --color-amber-gold-light: #fbbf24;
+    --color-amber-gold-dark: #d97706;
+    --color-warm-cream: #faf6f0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: #faf6f0;
+    color: #1f1109;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1f1109;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a2b1b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.65);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Infinite Marquee Chain Animation for Reviews */
+@keyframes marqueeChain {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-chain {
+  display: flex;
+  width: max-content;
+  animation: marqueeChain 38s linear infinite;
+}
+
+.animate-marquee-chain:hover {
+  animation-play-state: paused;
+}

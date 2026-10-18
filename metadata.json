@@ -1,0 +1,6 @@
+{
+  "name": "Canvas Bistro Bar, CBD Belapur",
+  "description": "Lively bistro bar in CBD Belapur offering artisanal coffee, Sunday buffet, diverse seafood, continental specialties, craft cocktails, and table reservations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
