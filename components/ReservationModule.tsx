@@ -15,7 +15,6 @@ export default function ReservationModule({ initialSlot }: ReservationModuleProp
   const [selectedDate, setSelectedDate] = useState<string>('Today');
   const [customDate, setCustomDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>(initialSlot || '7:00 PM');
-  const [seatingArea, setSeatingArea] = useState<string>('Indoor Bistro Lounge');
   const [guestName, setGuestName] = useState<string>('');
   const [guestPhone, setGuestPhone] = useState<string>('');
   const [specialRequests, setSpecialRequests] = useState<string>('');
@@ -28,13 +27,6 @@ export default function ReservationModule({ initialSlot }: ReservationModuleProp
     '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM',
   ];
 
-  const seatingOptions = [
-    'Indoor Bistro Lounge',
-    'Bar Counter / High Tops',
-    'Private Dining Room',
-    'Sunday Buffet Section',
-  ];
-
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
@@ -42,7 +34,7 @@ export default function ReservationModule({ initialSlot }: ReservationModuleProp
 
   const getReservationWhatsAppUrl = () => {
     const dateText = selectedDate === 'Custom' ? customDate || 'Upcoming date' : selectedDate;
-    const text = `Hi Canvas Bistro Bar, I would like to confirm my table reservation:%0A• Name: ${guestName || 'Guest'}%0A• Phone: ${guestPhone || 'Not provided'}%0A• Party Size: ${partySize} Guests%0A• Date: ${dateText}%0A• Time: ${selectedTime}%0A• Seating: ${seatingArea}${specialRequests ? `%0A• Note: ${specialRequests}` : ''}`;
+    const text = `Hi Canvas Bistro Bar, I would like to confirm my table reservation:%0A• Name: ${guestName || 'Guest'}%0A• Phone: ${guestPhone || 'Not provided'}%0A• Party Size: ${partySize} Guests%0A• Date: ${dateText}%0A• Time: ${selectedTime}${specialRequests ? `%0A• Note: ${specialRequests}` : ''}`;
     return `https://wa.me/917595959339?text=${text}`;
   };
 
@@ -161,19 +153,24 @@ export default function ReservationModule({ initialSlot }: ReservationModuleProp
                   </div>
                 </div>
 
-                {/* Selected Time Quick Display */}
+                {/* Preferred Time Dropdown */}
                 <div>
                   <label className="block text-xs font-semibold text-[#AA6E4C] uppercase tracking-wider mb-2">
-                    Selected Time
+                    Preferred Time
                   </label>
                   <div className="relative">
                     <Clock className="w-4 h-4 text-[#F59E0B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                    <input
-                      type="text"
-                      readOnly
+                    <select
                       value={selectedTime}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#F59E0B] font-bold text-sm"
-                    />
+                      onChange={(e) => setSelectedTime(e.target.value)}
+                      className="w-full pl-10 pr-8 py-3 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#F59E0B] transition-colors appearance-none cursor-pointer"
+                    >
+                      {timeSlots.map((slot) => (
+                        <option key={slot} value={slot} className="bg-[#190E08] text-[#FAF6F0]">
+                          {slot}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
@@ -190,55 +187,6 @@ export default function ReservationModule({ initialSlot }: ReservationModuleProp
                   />
                 </div>
               )}
-
-              {/* Time Slots Grid (Exactly matching user screenshot 1) */}
-              <div className="pt-2">
-                <label className="block text-xs font-semibold text-[#AA6E4C] uppercase tracking-wider mb-3">
-                  Available Dining Time Slots
-                </label>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-2">
-                  {timeSlots.map((slot) => {
-                    const isSelected = selectedTime === slot;
-                    return (
-                      <button
-                        type="button"
-                        key={slot}
-                        onClick={() => setSelectedTime(slot)}
-                        className={`py-2 px-1 text-xs font-semibold rounded-lg border transition-all text-center whitespace-nowrap ${
-                          isSelected
-                            ? 'bg-[#F59E0B] text-[#130A05] border-[#F59E0B] shadow-md font-bold'
-                            : 'bg-[#190E08] text-[#FAF6F0] border-[#361F13] hover:border-[#683F27] hover:bg-[#29170E]'
-                        }`}
-                      >
-                        {slot}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Seating Preference */}
-              <div className="pt-2">
-                <label className="block text-xs font-semibold text-[#AA6E4C] uppercase tracking-wider mb-2">
-                  Seating Ambience Preference
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {seatingOptions.map((opt) => (
-                    <button
-                      type="button"
-                      key={opt}
-                      onClick={() => setSeatingArea(opt)}
-                      className={`p-2.5 rounded-xl border text-xs font-medium text-left transition-colors ${
-                        seatingArea === opt
-                          ? 'border-[#F59E0B] bg-[#29170E] text-[#F59E0B]'
-                          : 'border-[#361F13] bg-[#190E08] text-[#DDBCAC] hover:border-[#4A2B1B]'
-                      }`}
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* Guest Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">

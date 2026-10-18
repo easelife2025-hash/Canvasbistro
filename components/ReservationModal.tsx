@@ -23,7 +23,6 @@ export default function ReservationModal({
   const [selectedTime, setSelectedTime] = useState<string>(defaultSlot);
   const [guestName, setGuestName] = useState<string>('');
   const [guestPhone, setGuestPhone] = useState<string>('');
-  const [seatingArea, setSeatingArea] = useState<string>('Indoor Bistro Lounge');
   const [notes, setNotes] = useState<string>(defaultOccasion);
   const [isDone, setIsDone] = useState<boolean>(false);
 
@@ -41,7 +40,7 @@ export default function ReservationModal({
   };
 
   const getWhatsAppLink = () => {
-    const text = `Hi Canvas Bistro Bar, I'd like to book a table:%0A• Name: ${guestName || 'Guest'}%0A• Phone: ${guestPhone || 'Not provided'}%0A• Party Size: ${partySize} Guests%0A• Date: ${selectedDate}%0A• Time: ${selectedTime}%0A• Seating: ${seatingArea}${notes ? `%0A• Note: ${notes}` : ''}`;
+    const text = `Hi Canvas Bistro Bar, I'd like to book a table:%0A• Name: ${guestName || 'Guest'}%0A• Phone: ${guestPhone || 'Not provided'}%0A• Party Size: ${partySize} Guests%0A• Date: ${selectedDate}%0A• Time: ${selectedTime}${notes ? `%0A• Note: ${notes}` : ''}`;
     return `https://wa.me/917595959339?text=${text}`;
   };
 
@@ -119,7 +118,7 @@ export default function ReservationModal({
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-1">
+            <div className="grid grid-cols-3 gap-2.5 pt-1">
               <div>
                 <label className="block text-[11px] font-semibold text-[#AA6E4C] uppercase mb-1">
                   Guests
@@ -127,7 +126,7 @@ export default function ReservationModal({
                 <select
                   value={partySize}
                   onChange={(e) => setPartySize(Number(e.target.value))}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#FAF6F0] text-xs font-semibold focus:border-[#F59E0B] focus:outline-none"
+                  className="w-full px-2.5 py-2.5 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#FAF6F0] text-xs font-semibold focus:border-[#F59E0B] focus:outline-none"
                 >
                   {[1, 2, 3, 4, 5, 6, 8, 10, 12].map((num) => (
                     <option key={num} value={num} className="bg-[#190E08]">
@@ -144,36 +143,31 @@ export default function ReservationModal({
                 <select
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#FAF6F0] text-xs font-semibold focus:border-[#F59E0B] focus:outline-none"
+                  className="w-full px-2.5 py-2.5 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#FAF6F0] text-xs font-semibold focus:border-[#F59E0B] focus:outline-none"
                 >
                   <option value="Today">Today</option>
                   <option value="Tomorrow">Tomorrow</option>
-                  <option value="This Sunday (Sunday Buffet)">This Sunday (Sunday Buffet)</option>
-                  <option value="Upcoming Friday">Upcoming Friday</option>
-                  <option value="Upcoming Saturday">Upcoming Saturday</option>
+                  <option value="This Sunday">This Sunday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
                 </select>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-[11px] font-semibold text-[#AA6E4C] uppercase mb-1.5">
-                Select Time Slot
-              </label>
-              <div className="grid grid-cols-4 gap-1.5">
-                {timeSlots.map((slot) => (
-                  <button
-                    type="button"
-                    key={slot}
-                    onClick={() => setSelectedTime(slot)}
-                    className={`py-2 px-1 text-xs font-semibold rounded-lg border transition-all text-center whitespace-nowrap ${
-                      selectedTime === slot
-                        ? 'bg-[#F59E0B] text-[#130A05] border-[#F59E0B] font-bold'
-                        : 'bg-[#190E08] text-[#FAF6F0] border-[#361F13] hover:border-[#683F27]'
-                    }`}
-                  >
-                    {slot}
-                  </button>
-                ))}
+              <div>
+                <label className="block text-[11px] font-semibold text-[#AA6E4C] uppercase mb-1">
+                  Time
+                </label>
+                <select
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  className="w-full px-2.5 py-2.5 rounded-xl bg-[#190E08] border border-[#4A2B1B] text-[#FAF6F0] text-xs font-semibold focus:border-[#F59E0B] focus:outline-none"
+                >
+                  {timeSlots.map((slot) => (
+                    <option key={slot} value={slot} className="bg-[#190E08]">
+                      {slot}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 

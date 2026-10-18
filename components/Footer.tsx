@@ -1,19 +1,14 @@
-'use client';
-
 import React from 'react';
-import { MapPin, Clock, Globe, ArrowUp } from 'lucide-react';
+import { MapPin, Clock } from 'lucide-react';
 import { BISTRO_INFO } from '@/lib/bistro-data';
 import { RealPhoneIcon, RealWhatsAppIcon } from '@/components/icons/RealIcons';
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <footer className="bg-[#130A05] text-[#DDBCAC] border-t border-[#361F13] pt-16 pb-24 sm:pb-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#29170E]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand & Mission (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-2.5">
@@ -133,19 +128,6 @@ export default function Footer() {
               </a>
             </div>
           </div>
-        </div>
-
-        {/* Bottom Bar with Back to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8B5735]">
-          <p>© {new Date().getFullYear()} Canvas Bistro Bar, CBD Belapur. All rights reserved.</p>
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-[#AA6E4C] hover:text-[#F59E0B] transition-colors"
-          >
-            <span>Back to Top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
         </div>
       </div>
     </footer>
