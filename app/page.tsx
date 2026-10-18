@@ -14,7 +14,6 @@ import LocationContactSection from '@/components/LocationContactSection';
 import Footer from '@/components/Footer';
 import FloatingContactButtons from '@/components/FloatingContactButtons';
 import ReservationModal from '@/components/ReservationModal';
-import OwnerPitchBanner from '@/components/OwnerPitchBanner';
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,9 +67,6 @@ export default function HomePage() {
 
       {/* Mandatory Floating WhatsApp and Call Buttons (Bottom-Right) */}
       <FloatingContactButtons />
-
-      {/* Client Pitch & Verification Transparency Pill (Bottom-Left) */}
-      <OwnerPitchBanner />
 
       {/* Interactive Reservation Modal */}
       <ReservationModal
